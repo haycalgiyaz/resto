@@ -1,0 +1,21 @@
+.form-group .checkbox {
+    display: none;
+}
+
+.form-group .checkbox + .btn-group > label span {
+    width: 20px;
+}
+
+.form-group .checkbox + .btn-group > label span:first-child {
+    display: none;
+}
+.form-group .checkbox + .btn-group > label span:last-child {
+    display: inline-block;   
+}
+
+.form-group .checkbox:checked + .btn-group > label span:first-child {
+    display: inline-block;
+}
+.form-group .checkbox:checked + .btn-group > label span:last-child {
+    display: none;   
+}
