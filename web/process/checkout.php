@@ -34,4 +34,24 @@ if (isset($_POST['act'])) {
 
 }
 
+if (isset($_GET['act'])) {
+    $key = $_GET['act'];
+    $id = $_GET['id'];
+
+    if ($key == "do-order") {
+        $sql = "UPDATE tb_detail_transaksi SET is_done = 1 where id_detail_transaksi = $id";
+        $con->query($sql);
+    }elseif($key == 'cancell-order'){
+        $sql = "UPDATE tb_detail_transaksi SET is_done = 5 where id_detail_transaksi = $id";
+        $con->query($sql);
+    }elseif ($key == 'done-order') {
+        $sql = "UPDATE tb_detail_transaksi SET is_done = 2 where id_detail_transaksi = $id";
+        $con->query($sql);
+    }
+
+    header("location: ../dapur.php");
+
+    
+}
+
  ?>

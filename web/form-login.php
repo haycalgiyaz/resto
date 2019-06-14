@@ -1,9 +1,9 @@
 <?php 
 	
 	session_start();
-	var_dump($_SESSION['dapur']);
-
+// echo md5('secret');
  ?>
+
 <!DOCTYPE html>
 <html>
 <head>

@@ -91,8 +91,40 @@ if (!isset($_SESSION['dapur'])) {
 					html+= 	'<div id="collapse'+i+'" class="panel-collapse collapse">';
 				}
 				$.each(item.child, function(j, row){
-		    		html+= 		'<div class="panel-body">'+row.qty+'x '+row.nm_menu+'';
+		    		html+= 		'<div class="panel-body">';
+					html+=      '<div class="col-xs-8">';
+					if (row.is_done == 0) {
+						html+=		'<label class="label label-warning" style="margin-right:5px;"> Waiting ..</label>';
+					}else if(row.is_done == 1){
+						html+=		'<label class="label label-warning" style="margin-right:5px;"> Cooking .. </label>';
+					}else if(row.is_done == 2){
+						html+=		'<label class="label label-success" style="margin-right:5px;"> Ready to Serve</label>';
+					}else{
+						html+=		'<label class="label label-danger" style="margin-right:5px;"> Produk Habis</label>';
+					}
+		    		html+=		row.qty+'x '+row.nm_menu;
 					html+=      '</div>';
+					if (row.is_done == 0) {
+						html+=      '<div class="col-xs-2" style="padding:1px">';
+						html+=		'<a href="process/checkout.php?act=do-order&id='+row.id_detail_transaksi+'" class="btn btn-success btn-sm btn-block"  onclick="return confirm(\'Apakah anda yakin ingin memproses?\')">Process</a>';
+						html+=      '</div>';
+						html+=      '<div class="col-xs-2" style="padding:1px">';
+						html+=		'<a href="process/checkout.php?act=cancell-order&id='+row.id_detail_transaksi+'" class="btn btn-danger btn-sm btn-block" onclick="return confirm(\'Menu ini sudah habis??\')">Habis?</a>';
+						html+=      '</div>';
+					}else if(row.is_done == 1){
+						html+=      '<div class="col-xs-4">';
+							html+=		'<a href="process/checkout.php?act=done-order&id='+row.id_detail_transaksi+'" class="btn btn-success btn-sm btn-block" onclick="return confirm(\'Selesai Masak?\')">Selesai?</a>';
+						html+=      '</div>';
+					}else if(row.is_done == 2){
+						html+=      '<div class="col-xs-4">';
+							html+=		'<button class="btn btn-success btn-sm btn-block" disabled>Done</button>';
+						html+=      '</div>';
+					}else{
+						html+=      '<div class="col-xs-4">';
+							html+=		'<button class="btn btn-danger btn-sm btn-block" disabled>Habis</button>';
+						html+=      '</div>';
+					}
+					html+= 	'</div>';
 				});
 				html+= 	'</div>';
 				html+= 	'</div>';
