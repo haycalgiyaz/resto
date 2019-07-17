@@ -28,6 +28,12 @@ if ($cek > 0) {
 	}elseif($role ==5) {
 		$_SESSION['dapur'] = "true";
 		header("location:../dapur.php");
+	}elseif($role ==6) {
+		$_SESSION['barista'] = "true";
+		header("location:../bar.php");
+	}elseif($role ==3) {
+		$_SESSION['kasir'] = "true";
+		// header("location:../dapur.php");
 	}
 
 } else {

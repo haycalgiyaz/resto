@@ -48,11 +48,11 @@ if (isset($_GET['act'])) {
         $sql = "UPDATE tb_detail_transaksi SET is_done = 2 where id_detail_transaksi = $id";
         $con->query($sql);
     }elseif ($key == 'do-transaction-kitchen') {
-        $sql = "UPDATE tb_transaksi SET kitchen_closed = 1 where id_transaksi = $id";
+        $sql = "UPDATE tb_transaksi SET bar_closed = 1 where id_transaksi = $id";
         $con->query($sql);
     }
 
-    header("location: ../dapur.php");
+    header("location: ../bar.php");
 
     
 }

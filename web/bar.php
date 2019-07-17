@@ -6,13 +6,16 @@ session_start();
 if (!isset($_SESSION['dapur'])) {
 	header("Location: process/logout.php");
 }
+// if (!isset($_SESSION['bar'])) {
+// 	header("Location: process/logout.php");
+// }
 
 ?>
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>DAPUR</title>
+	<title>BAR</title>
 	<link rel="stylesheet" type="text/css" href="asset/css/bootstrap.css">
 	<link rel="stylesheet" type="text/css" href="asset/css/manual.css">
 	<script src="asset/js/jquery.js"></script>
@@ -41,9 +44,9 @@ if (!isset($_SESSION['dapur'])) {
 		</section>
 		<div class="container">
 			<div class="col-md-8 col-md-offset-2">
-				<h1>Kitchen</h1>
+				<h1>Bar</h1>
 				<hr>
-				<h4>Dapur Warung Bebek Kemang</h4>
+				<h4>Bar Minuman Warung Bebek Kemang</h4>
 				<div id="progressBar" style="margin-bottom: 20px"></div>				
 			</div>
 
@@ -73,7 +76,7 @@ if (!isset($_SESSION['dapur'])) {
 
 	function dataOrder(){
 		console.log('refresh');
-		$.get("process/data-dapur.php?data=all", function(data, status){
+		$.get("process/data-bar.php?data=all", function(data, status){
 	      	var	data_detail = '';
 	      	var html ='';
 	      	
@@ -111,14 +114,14 @@ if (!isset($_SESSION['dapur'])) {
 					html+=      '</div>';
 					if (row.is_done == 0) {
 						html+=      '<div class="col-xs-2" style="padding:1px">';
-						html+=		'<a href="process/checkout.php?act=do-order&id='+row.id_detail_transaksi+'" class="btn btn-success btn-sm btn-block"  onclick="return confirm(\'Apakah anda yakin ingin memproses?\')">Process</a>';
+						html+=		'<a href="process/checkout-bar.php?act=do-order&id='+row.id_detail_transaksi+'" class="btn btn-success btn-sm btn-block"  onclick="return confirm(\'Apakah anda yakin ingin memproses?\')">Process</a>';
 						html+=      '</div>';
 						html+=      '<div class="col-xs-2" style="padding:1px">';
-						html+=		'<a href="process/checkout.php?act=cancell-order&id='+row.id_detail_transaksi+'" class="btn btn-danger btn-sm btn-block" onclick="return confirm(\'Menu ini sudah habis??\')">Habis?</a>';
+						html+=		'<a href="process/checkout-bar.php?act=cancell-order&id='+row.id_detail_transaksi+'" class="btn btn-danger btn-sm btn-block" onclick="return confirm(\'Menu ini sudah habis??\')">Habis?</a>';
 						html+=      '</div>';
 					}else if(row.is_done == 1){
 						html+=      '<div class="col-xs-4">';
-							html+=		'<a href="process/checkout.php?act=done-order&id='+row.id_detail_transaksi+'" class="btn btn-success btn-sm btn-block" onclick="return confirm(\'Selesai Masak?\')">Selesai?</a>';
+							html+=		'<a href="process/checkout-bar.php?act=done-order&id='+row.id_detail_transaksi+'" class="btn btn-success btn-sm btn-block" onclick="return confirm(\'Selesai Masak?\')">Selesai?</a>';
 						html+=      '</div>';
 					}else if(row.is_done == 2){
 						html+=      '<div class="col-xs-4">';
@@ -134,7 +137,7 @@ if (!isset($_SESSION['dapur'])) {
 				html+= 	'</div>';
 				if (!status) {
 					html+= 	'<div class="panel-footer">';
-					html+= 	'<a href="process/checkout.php?act=do-transaction-kitchen&id='+item.data.id_transaksi+'" class="btn btn-success btn-sm btn-block"  onclick="return confirm(\'Apakah Pesnan sudah selesai?\')">Selesai</a>';
+					html+= 	'<a href="process/checkout-bar.php?act=do-transaction-kitchen&id='+item.data.id_transaksi+'" class="btn btn-success btn-sm btn-block"  onclick="return confirm(\'Apakah Pesnan sudah selesai?\')">Selesai</a>';
 					html+= 	'</div>';
 				}
 				html+= 	'</div>';
