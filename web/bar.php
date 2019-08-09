@@ -3,12 +3,13 @@
 include 'process/koneksi.php';
 
 session_start();
-if (!isset($_SESSION['dapur'])) {
-	header("Location: process/logout.php");
-}
-// if (!isset($_SESSION['bar'])) {
+// if (!isset($_SESSION['dapur'])) {
 // 	header("Location: process/logout.php");
 // }
+
+if (!isset($_SESSION['barista'])) {
+	header("Location: process/logout.php");
+}
 
 ?>
 
@@ -22,8 +23,11 @@ if (!isset($_SESSION['dapur'])) {
 	<script src="asset/js/bootstrap.js"></script>
 	<script src="asset/js/jquery-2.2.3.min.js"></script>
 	<script type='text/javascript' src="asset/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="background-image: url('asset/images/bar1.jpg'); background-size: cover;">
 	<main>
 		<section id="navbar">
 			<nav class="navbar navbar-default">
@@ -36,7 +40,14 @@ if (!isset($_SESSION['dapur'])) {
 					</div>
 					<div class="collapse navbar-collapse" id="MyNavBar">
 						<ul class="nav navbar-nav navbar-right">
-							<li><a class="glyphicon glyphicon-user" href=""> User</a></li>
+							<!-- <li><a class="glyphicon glyphicon-user" href=""> User</a></li> -->
+							<li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Akun <span class="caret"></span></a>
+				          		<ul class="dropdown-menu">
+				            		<li><a href="process/logout.php">Logout</a></li>
+				          		</ul>
+					        </li>
+							
 						</ul>
 					</div>
 				</div>
@@ -79,9 +90,14 @@ if (!isset($_SESSION['dapur'])) {
 		$.get("process/data-bar.php?data=all", function(data, status){
 	      	var	data_detail = '';
 	      	var html ='';
+
+	      	var	loop = 0;
 	      	
 	      	$.each(JSON.parse(data), function(i, item) {
-	      		console.log(item);
+	      		if (item.child.length == 0) {
+	      			return true;
+	      		}
+	      		loop++;
 	      		var status = 0;
 				html+= 	'<div class="panel-group">';
 				html+= 	'<div class="panel panel-primary">';
@@ -90,7 +106,7 @@ if (!isset($_SESSION['dapur'])) {
 				html+= 	'<a data-toggle="collapse" href="#collapse'+i+'">'+item.data.nm_meja+'</a>';
 				html+= 	'</h4>';
 				html+= 	'</div>';
-				if (i < 1) {
+				if (loop == 1) {
 					html+= 	'<div id="collapse'+i+'" class="panel-collapse collapse in" aria-expanded=true>';
 				}else{
 					html+= 	'<div id="collapse'+i+'" class="panel-collapse collapse">';

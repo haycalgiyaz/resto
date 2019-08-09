@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 17 Jul 2019 pada 17.00
+-- Generation Time: 09 Agu 2019 pada 20.30
 -- Versi Server: 10.1.26-MariaDB
 -- PHP Version: 7.0.23
 
@@ -91,10 +91,13 @@ INSERT INTO `tb_detail_transaksi` (`id_detail_transaksi`, `id_transaksi`, `id_me
 (10, 5, 2, 1, 20000, '', 5),
 (11, 5, 6, 1, 15000, '', 5),
 (12, 6, 2, 2, 40000, '', 5),
-(13, 7, 2, 1, 20000, '', 0),
-(14, 8, 2, 1, 20000, '', 0),
-(15, 9, 2, 1, 20000, '', 0),
-(16, 9, 4, 1, 8000, '', 2);
+(13, 7, 2, 1, 20000, '', 2),
+(14, 8, 2, 1, 20000, '', 2),
+(15, 9, 2, 1, 20000, '', 2),
+(16, 9, 4, 1, 8000, '', 2),
+(17, 10, 2, 1, 20000, '', 2),
+(18, 11, 3, 1, 34500, '', 1),
+(19, 12, 4, 1, 8000, '', 2);
 
 -- --------------------------------------------------------
 
@@ -181,10 +184,11 @@ CREATE TABLE `tb_transaksi` (
   `total_real` int(11) DEFAULT NULL,
   `bayar` int(11) DEFAULT NULL,
   `kembalian` int(11) DEFAULT NULL,
-  `is_debit` int(11) DEFAULT NULL,
+  `payment_method` varchar(11) DEFAULT NULL,
   `is_print` int(11) DEFAULT NULL,
   `kitchen_closed` int(11) DEFAULT NULL,
   `bar_closed` int(11) DEFAULT NULL,
+  `status` int(11) DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `updated_at` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -193,14 +197,17 @@ CREATE TABLE `tb_transaksi` (
 -- Dumping data untuk tabel `tb_transaksi`
 --
 
-INSERT INTO `tb_transaksi` (`id_transaksi`, `id_waiters`, `id_meja`, `id_kasir`, `sub_total`, `service`, `total_akhir`, `total_real`, `bayar`, `kembalian`, `is_debit`, `is_print`, `kitchen_closed`, `bar_closed`, `created_at`, `updated_at`) VALUES
-(3, 1, 4, NULL, 113000, 32700, 145700, NULL, NULL, NULL, NULL, NULL, 1, 1, '2019-06-19 15:13:41', '0000-00-00 00:00:00'),
-(4, 4, 3, NULL, 56000, 9600, 65600, NULL, NULL, NULL, NULL, NULL, 1, 1, '2019-06-19 15:13:55', '0000-00-00 00:00:00'),
-(5, 4, 1, NULL, 35000, 5500, 40500, NULL, NULL, NULL, NULL, NULL, 1, 1, '2019-06-19 15:13:58', '0000-00-00 00:00:00'),
-(6, 4, 4, NULL, 40000, 4000, 44000, NULL, NULL, NULL, NULL, NULL, 1, 1, '2019-06-19 15:14:01', '0000-00-00 00:00:00'),
-(7, 4, 1, NULL, 20000, 2000, 22000, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2019-06-19 15:14:06', '0000-00-00 00:00:00'),
-(8, 5, 3, NULL, 20000, 2000, 22000, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2019-07-17 12:08:20', '0000-00-00 00:00:00'),
-(9, 6, 3, NULL, 28000, 4800, 32800, NULL, NULL, NULL, NULL, NULL, NULL, 1, '2019-07-17 12:08:25', '0000-00-00 00:00:00');
+INSERT INTO `tb_transaksi` (`id_transaksi`, `id_waiters`, `id_meja`, `id_kasir`, `sub_total`, `service`, `total_akhir`, `total_real`, `bayar`, `kembalian`, `payment_method`, `is_print`, `kitchen_closed`, `bar_closed`, `status`, `created_at`, `updated_at`) VALUES
+(3, 1, 4, 2, 113000, 32700, 145700, 145700, 200000, 54300, 'cash', NULL, 1, 1, 1, '2019-08-09 18:04:30', '0000-00-00 00:00:00'),
+(4, 4, 3, NULL, 56000, 9600, 65600, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '2019-06-19 15:13:55', '0000-00-00 00:00:00'),
+(5, 4, 1, NULL, 35000, 5500, 40500, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '2019-06-19 15:13:58', '0000-00-00 00:00:00'),
+(6, 4, 4, NULL, 40000, 4000, 44000, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '2019-06-19 15:14:01', '0000-00-00 00:00:00'),
+(7, 4, 1, NULL, 20000, 2000, 22000, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '2019-08-09 16:16:58', '0000-00-00 00:00:00'),
+(8, 5, 3, NULL, 20000, 2000, 22000, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '2019-08-09 16:32:10', '0000-00-00 00:00:00'),
+(9, 6, 3, NULL, 28000, 4800, 32800, NULL, NULL, NULL, NULL, NULL, 1, 1, NULL, '2019-08-09 16:17:15', '0000-00-00 00:00:00'),
+(10, 6, 1, NULL, 20000, 2000, 22000, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-08-09 16:27:36', '0000-00-00 00:00:00'),
+(11, 6, 3, NULL, 34500, 3450, 37950, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-08-09 16:28:12', '0000-00-00 00:00:00'),
+(12, 6, 3, NULL, 8000, 800, 8800, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '2019-08-09 16:48:09', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -232,7 +239,7 @@ INSERT INTO `tb_user` (`id_user`, `nm_user`, `username`, `password`, `jk_user`, 
 (3, 'Zulfa', 'Zull', 'c93ccd78b2076528346216b3b2f701e6', 'L', '085865150162', 'pondok petir', 'Barista', '', 1, '2019-07-17 11:58:14', '2019-05-28 20:46:10'),
 (4, 'NafiUnyu', 'nafi', 'e9f8f0b46cfb70b154cf5741841d3453', 'L', '', '', 'Dapur', '', 5, '2019-06-03 01:07:25', '2019-06-03 01:07:25'),
 (5, 'NafiUnyu', 'zulfah', '5ebe2294ecd0e0f08eab7690d2a6ee69', 'L', '09093482349238', 'depok', '', '', 4, '2019-06-18 21:47:24', '2019-06-18 21:47:24'),
-(6, 'ilham', 'ilham_waiters', '5ebe2294ecd0e0f08eab7690d2a6ee69', 'L', '', '', '', '', 4, '2019-07-16 19:06:25', '2019-07-16 19:06:25');
+(6, 'ilham', 'ilham_waiters', '5ebe2294ecd0e0f08eab7690d2a6ee69', 'L', '', '', 'Waitres', '', 4, '2019-08-05 21:00:14', '2019-08-05 21:00:14');
 
 --
 -- Indexes for dumped tables
@@ -306,7 +313,7 @@ ALTER TABLE `tb_detail_katagori`
 -- AUTO_INCREMENT for table `tb_detail_transaksi`
 --
 ALTER TABLE `tb_detail_transaksi`
-  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id_detail_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `tb_katagori`
@@ -330,7 +337,7 @@ ALTER TABLE `tb_menu`
 -- AUTO_INCREMENT for table `tb_transaksi`
 --
 ALTER TABLE `tb_transaksi`
-  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id_transaksi` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tb_user`

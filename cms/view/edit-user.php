@@ -11,7 +11,7 @@
 					<label>Username</label>
 					<input type="text" name="username" placeholder="masukkan username disini" class="form-control" value="<?php echo $data['username']; ?>">
 					<label>Password</label>
-					<input type="password" name="password" placeholder="*********" class="form-control" value="<?php echo $data['password']; ?>">
+					<input type="password" name="password" placeholder="*********" class="form-control">
 					<label>Jenis Kelamin</label>
 					<select name="jk_user" class="form-control" value="<?php echo $data['jk_user']; ?>">
 						<option value="L">Laki Laki</option>
@@ -24,13 +24,13 @@
 					<label>Departermen</label>
 					<input type="text" name="nm_departemen" placeholder="" class="form-control" value="<?php echo $data['nm_departemen']; ?>">
 					<label>Role</label>
-					<select name='role'class="form-control" value="<?php echo $data['role']; ?>">
-						<option value="1">Super Admin</option>
-						<option value="2">Admin</option>
-						<option value="3">Kasir</option>
-						<option value="4">Waiters</option>
-						<option value="5">Dapur</option>
-						<option value="6">Barista</option>
+					<select name='role'class="form-control" >
+						<option value="1" <?php echo ($data['role'] == 1)? 'selected':''; ?>> Super Admin</option>
+						<option value="2" <?php echo ($data['role'] == 2)? 'selected':''; ?>>Admin</option>
+						<option value="3" <?php echo ($data['role'] == 3)? 'selected':''; ?>>Kasir</option>
+						<option value="4" <?php echo ($data['role'] == 4)? 'selected':''; ?>>Waiters</option>
+						<option value="5" <?php echo ($data['role'] == 5)? 'selected':''; ?>>Dapur</option>
+						<option value="6" <?php echo ($data['role'] == 6)? 'selected':''; ?>>Barista</option>
 					</select>
 				
 				</div>

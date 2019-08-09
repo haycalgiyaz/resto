@@ -9,7 +9,7 @@ include "koneksi.php";
 	while($row = mysqli_fetch_array($query)) {
 			$id = $row['id_transaksi'];
 
-			$det = mysqli_query($con, "SELECT * FROM tb_detail_transaksi a JOIN tb_menu b ON a.id_menu=b.id_menu where a.id_transaksi=$id and b.location='bar'");
+			$det = mysqli_query($con, "SELECT * FROM tb_detail_transaksi a JOIN tb_menu b ON a.id_menu=b.id_menu where a.id_transaksi=$id and a.is_done in (0,1) and b.location='bar'");
 			$detail = array();
 
 			while($child = mysqli_fetch_array($det)) {

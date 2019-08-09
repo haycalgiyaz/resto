@@ -3,12 +3,12 @@
 include 'process/koneksi.php';
 
 session_start();
-if (!isset($_SESSION['dapur'])) {
-	header("Location: process/logout.php");
-}
-// if (!isset($_SESSION['kasir'])) {
+// if (!isset($_SESSION['dapur'])) {
 // 	header("Location: process/logout.php");
 // }
+if (!isset($_SESSION['kasir'])) {
+	header("Location: process/logout.php");
+}
 
 ?>
 
@@ -22,8 +22,12 @@ if (!isset($_SESSION['dapur'])) {
 	<script src="asset/js/bootstrap.js"></script>
 	<script src="asset/js/jquery-2.2.3.min.js"></script>
 	<script type='text/javascript' src="asset/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
-<body>
+<body style="background-image: url('asset/images/kasir.jpg'); background-size: cover;">
+
 	<main>
 		<section id="navbar">
 			<nav class="navbar navbar-default">
@@ -33,10 +37,20 @@ if (!isset($_SESSION['dapur'])) {
 							<span class="icon-bar"></span>
 						</button>
 						<a class="navbar-brand" href="">Warung Bebek Kemang</a>
+						<ul class="nav navbar-nav ">
+						<li>
+							<a href="kasir-riwayat.php"> Riwayat Transaksi</a></li>
+						</ul>
 					</div>
 					<div class="collapse navbar-collapse" id="MyNavBar">
 						<ul class="nav navbar-nav navbar-right">
-							<li><a class="glyphicon glyphicon-user" href=""> User</a></li>
+							<!-- <li><a class="glyphicon glyphicon-user" href=""> User</a></li> -->
+							<li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Akun <span class="caret"></span></a>
+				          		<ul class="dropdown-menu">
+				            		<li><a href="process/logout.php">Logout</a></li>
+				          		</ul>
+					        </li>
 						</ul>
 					</div>
 				</div>
@@ -58,6 +72,7 @@ if (!isset($_SESSION['dapur'])) {
 <script type="text/javascript">
 	$( document ).ready(function() {
 	    dataOrder();
+
 	});
 
 	function dataOrder(){
@@ -103,21 +118,53 @@ if (!isset($_SESSION['dapur'])) {
 		    	html+= 					'<th>Rp '+total_real+'</th>';
 		    	html+= 				'</tr>';
 				html+= 				'<tr>';
-		    	html+= 					'<th colspan=2>Service</th>';
-		    	html+= 					'<th>Rp '+item.data.service+'</th>';
+		    	html+= 					'<td colspan=2>Service</td>';
+		    	html+= 					'<td>Rp '+item.data.service+'</td>';
+		    	html+= 				'</tr>';
+		    	html+= 				'<tr>';
+		    	html+= 					'<th colspan=2>Grand Total</th>';
+		    	html+= 					'<th>Rp '+grand+'</th>';
 		    	html+= 				'</tr>';
 		    	html+= 			'</table>';
+		    	html+= 			'<hr>';
+		    	html+= 			'<h3>Pembayaran</h3>';
+		    	html+= 			'<form action="process/checkout-kasir.php" method="post" class="form-parent">';
+		    	html+= 			'	<input type="hidden" name="total_real" value="'+total_real+'">';
+		    	html+= 			' 	<div class="col-sm-6 col-sm-offset-6">';
+		    	html+= 			'		<label>Metode Pembayaran</label>';
+		    	html+= 			'		<select class="metode_pembayaran form-control" name="metode_pembayaran" >';
+		    	html+= 			'			<option value="cash">Cash</option><option value="debit"> Debit</option><option value="credit">Credit Card</option>';
+		    	html+= 			'		</select>';
+		    	html+= 			'	</div>';
+
+		    	html+= 			'	<label class="col-sm-6 col-sm-offset-6">Jumlah Dibayar (Rp)</label>';
+		    	html+= 			' 	<div class="col-sm-6 col-sm-offset-6 input-group" style="padding-left:15px; padding-right:15px">';
+		    	html+= 			'		<input type="hidden" name="id" value="'+item.data.id_transaksi+'">';
+		    	html+= 			'		<input type="hidden" class="grand" name="grand" value="'+grand+'">';
+		    	html+= 			'		<input type="number" class="form-control purchase" name="purchase">';
+		    	html+= 			'		<span class="input-group-btn"><button class="btn btn-default get-price" type="button" onclick="getPrice()">Hitung!</button></span>';
+
+		    	html+= 			'	</div>';
+				html+= 			' 	<div class="col-sm-6 col-sm-offset-6">';
+		    	html+= 			'		<label>Kembalian (Rp)</label>';
+		    	html+= 			'		<input type="number" class="form-control cashback" name="cashback" readonly>';
+		    	html+= 			'	</div>';
+				html+= 			' 	<div class="col-sm-6 col-sm-offset-6" style="margin-top:10px">';
+		    	html+= 			'	 <button type="submit" class="btn btn-success btn-block">';
+		    	html+= 			'		Bayar';
+		    	html+= 			'	</div>';
+		    	html+= 			'</form>';
 				html+= 		'</div>';
 				html+= 	'</div>';
 				if (!status) {
-					html+= 	'<div class="panel-footer" style="overflow:hidden">';
-					html+= 		'<div class="col-md-3">';
-					html+= 			'<h3>Grand Total</h3>';
-					html+= 			'<input type="number" name="grand_total" value="'+grand+'">';
-					html+= 		'</div >';
+					// html+= 	'<div class="panel-footer" style="overflow:hidden">';
+					// html+= 		'<div class="col-md-3">';
+					// html+= 			'<h3>Grand Total</h3>';
+					// html+= 			'<input type="number" name="grand_total" value="'+grand+'">';
+					// html+= 		'</div >';
 
 					// html+= 	'<a href="process/checkout.php?act=do-transaction-kitchen&id='+item.data.id_transaksi+'" class="btn btn-success btn-sm btn-block"  onclick="return confirm(\'Apakah Pesnan sudah selesai?\')">Selesai</a>';
-					html+= 	'</div>';
+					// html+= 	'</div>';
 				}
 				html+= 	'</div>';
 				html+= 	'</div>';
@@ -127,6 +174,17 @@ if (!isset($_SESSION['dapur'])) {
 
 	    });
 	}
+
+
+	function getPrice(grand) {
+		var	purchase = $('.purchase').val();
+		var	grand = $('.grand').val();
+
+		var cashback = parseInt(purchase) - parseInt(grand);
+		$('.cashback').val(cashback);
+		
+	}
+
 	
 
 </script>

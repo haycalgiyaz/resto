@@ -24,9 +24,9 @@ $qext = mysqli_query($con, "SELECT * from tb_menu where kategori = 4");
 	<link rel="stylesheet" type="text/css" href="asset/css/manual.css">
 	<script src="asset/js/jquery.js"></script>
 	<script src="asset/js/bootstrap.js"></script>
-	<style>
-
-	</style>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<main>
@@ -41,7 +41,13 @@ $qext = mysqli_query($con, "SELECT * from tb_menu where kategori = 4");
 					</div>
 					<div class="collapse navbar-collapse" id="MyNavBar">
 						<ul class="nav navbar-nav navbar-right">
-							<li><a class="glyphicon glyphicon-user" href=""> User</a></li>
+							<!-- <li><a class="glyphicon glyphicon-user" href=""> User</a></li> -->
+							<li class="dropdown">
+					        	<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Akun <span class="caret"></span></a>
+				          		<ul class="dropdown-menu">
+				            		<li><a href="process/logout.php">Logout</a></li>
+				          		</ul>
+					        </li>
 						</ul>
 					</div>
 				</div>
@@ -53,9 +59,8 @@ $qext = mysqli_query($con, "SELECT * from tb_menu where kategori = 4");
 		 -->
 		<section id="first-page">
 			<div class="container">
-				<div class="col-md-4">
-					<h2>Please Choose the Table First</h2>
-					<hr>
+				<div class="col-md-12">
+					
 					<h3>Harap pilih meja terlebih dahulu</h3>
 					<ul class="list-group">
 					<?php 	
@@ -106,7 +111,7 @@ $qext = mysqli_query($con, "SELECT * from tb_menu where kategori = 4");
 						<?php 	while ($makanan = mysqli_fetch_array($qmakanan)) { ?>
 					  		<div class="col-xs-12" style="padding-top:5; margin-top: 5mm" >
 					  			<div class="col-xs-4">	
-					  				<img src="http://localhost/skripshit/cms/images/uploads/<?php echo $makanan['img_url'] ?>" class="img-responsive" src="#" alt="Contoh" style="width: 100%">
+					  				<img src="http://localhost/resto/cms/images/uploads/<?php echo $makanan['img_url'] ?>" class="img-responsive" src="#" alt="Contoh" style="width: 100%">
 					  			</div>
 					  			<div class="col-xs-8">
 					  				<h4><?php echo $makanan['nm_menu'] ?></h4>	
@@ -127,7 +132,7 @@ $qext = mysqli_query($con, "SELECT * from tb_menu where kategori = 4");
 					  		<?php 	while ($minuman = mysqli_fetch_array($qminuman)) { ?>
 					  		<div class="col-xs-12" style="padding-top:5; margin-top: 5mm" >
 					  			<div class="col-xs-4">	
-					  				<img src="http://localhost/skripshit/cms/images/uploads/<?php echo $minuman['img_url'] ?>" class="img-responsive" src="#" alt="Contoh" style="width: 100%">
+					  				<img src="http://localhost/resto/cms/images/uploads/<?php echo $minuman['img_url'] ?>" class="img-responsive" src="#" alt="Contoh" style="width: 100%">
 					  			</div>
 					  			<div class="col-xs-8">
 					  				<h4><?php echo $minuman['nm_menu'] ?></h4>	
@@ -147,7 +152,7 @@ $qext = mysqli_query($con, "SELECT * from tb_menu where kategori = 4");
 					  		<?php 	while ($camilan = mysqli_fetch_array($qcamilan)) { ?>
 					  		<div class="col-xs-12" style="padding-top:5; margin-top: 5mm" >
 					  			<div class="col-xs-4">	
-					  				<img src="http://localhost/skripshit/cms/images/uploads/<?php echo $camilan['img_url'] ?>" class="img-responsive" src="#" alt="Contoh" style="width: 100%">
+					  				<img src="http://localhost/resto/cms/images/uploads/<?php echo $camilan['img_url'] ?>" class="img-responsive" src="#" alt="Contoh" style="width: 100%">
 					  			</div>
 					  			<div class="col-xs-8">
 					  				<h4><?php echo $camilan['nm_menu'] ?></h4>	
