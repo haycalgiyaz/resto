@@ -16,7 +16,7 @@
 </div>
 
 <div class="container" style="margin:2%; padding: 3%; background-color: white">
-	<table id="example" class="display">
+	<table id="example" class="table table-default">
 		<thead>
 			<tr>
 			    <td>Id User</td>

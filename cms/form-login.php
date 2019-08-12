@@ -14,16 +14,16 @@ if (!empty($_SESSION['status'])) {
 	<script src="assets/js/jquery.js"></script>
 	<script src="assets/js/bootstrap.js"></script>
 </head>
-<body>
-	<div class="col-md-4 col-md-offset-4" style="margin-top: 100px">
-		<center><h1>Silahkan Login</h1></center>
+<body style="background-image: url('images/bg.jpg'); background-size: cover">
+	<div class="col-md-2 col-md-offset-5" style="margin-top: 200px">
+		<center><p style="font-size: 2rem; color: white">Administrator</p></center>
 		<form action="process/login.php" method="post">
-			<label>Username</label>
+			<label style="color: white">Username</label>
 			<input type="text" name="username" class="form-control">
-			<label>Password</label>
+			<label style="color: white">Password</label>
 			<input type="password" name="password" class="form-control">
 			<br>
-			<input type="submit" name="simpan" class="btn btn-primary">
+			<input type="submit" name="simpan" class="btn btn-primary btn-block">
 		</form>
 	</div>
 		

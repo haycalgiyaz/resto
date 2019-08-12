@@ -2,7 +2,7 @@
 include 'koneksi.php';
 
 $username = $_POST['username'];
-$password = $_POST['password'];
+$password = md5($_POST['password']);
 
 $login = mysqli_query($con, "select * from tb_admin where username='$username' and password='$password'" );
 
